@@ -14,7 +14,9 @@ var errorResponse = JSON.stringify({
 
 // amount of time to wait for the PhantomJS
 // service to return a response.
-var PHANTOM_JS_TIMEOUT = 5000;
+var PHANTOM_JS_TIMEOUT = 10000;
+
+var PHANTOM_JS_PORT = 8989;
 
 /**
  * Resolves the url parameter from the request and
@@ -51,7 +53,7 @@ var resolveUrlFromPhantomJS = function (url, fn) {
 
     var timeoutId = null;
 
-    var phantomjsRequest = http.get('http://localhost:9876?url=' + url, function (responseStream) {
+    var phantomjsRequest = http.get('http://localhost:' + PHANTOM_JS_PORT + '?url=' + url, function (responseStream) {
 
         var data = '';
 
@@ -114,4 +116,4 @@ var handleRequest = function (request, response) {
     });
 };
 
-http.createServer(handleRequest).listen(9877, 'localhost');
+http.createServer(handleRequest).listen(9000, 'localhost');
